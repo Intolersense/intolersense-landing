@@ -108,14 +108,17 @@ const CTASection = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-            <motion.button
+            <motion.a
+              href="https://app.intolersense.com/"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-green-400 to-blue-500 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2"
+              className="bg-gradient-to-r from-green-400 to-blue-500 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2 inline-block"
             >
               <span>Start Your Journey to Clarity</span>
               <ArrowRight className="h-5 w-5" />
-            </motion.button>
+            </motion.a>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -207,13 +210,16 @@ const CTASection = () => {
           <p className="text-white/90 text-lg mb-6">
             Ready to transform your relationship with food?
           </p>
-          <motion.button
+          <motion.a
+            href="https://app.intolersense.com/"
+            target="_blank"
+            rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 px-12 py-6 rounded-xl text-xl font-bold shadow-lg hover:shadow-xl transition-all duration-300"
+            className="bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 px-12 py-6 rounded-xl text-xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 inline-block"
           >
             Start Free Trial Today
-          </motion.button>
+          </motion.a>
           <p className="text-white/60 text-sm mt-4">
             No credit card required • 7-day free trial • Cancel anytime
           </p>

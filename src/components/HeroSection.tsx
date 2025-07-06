@@ -109,13 +109,16 @@ const HeroSection = () => {
           transition={{ duration: 1, delay: 1 }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
-          <motion.button
+          <motion.a
+            href="https://app.intolersense.com/"
+            target="_blank"
+            rel="noopener noreferrer"
             whileHover={{ 
               scale: 1.05, 
               boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)",
             }}
             whileTap={{ scale: 0.95 }}
-            className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2"
+            className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2 inline-block"
           >
             <span>Start Your Journey to Clarity</span>
             <motion.div
@@ -124,7 +127,7 @@ const HeroSection = () => {
             >
               →
             </motion.div>
-          </motion.button>
+          </motion.a>
           <motion.button
             whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.1)" }}
             whileTap={{ scale: 0.95 }}
