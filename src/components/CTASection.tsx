@@ -107,7 +107,7 @@ const CTASection = () => {
             Join thousands who've cleared the fog and discovered their best diet.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+          <div className="flex justify-center items-center mb-8">
             <motion.a
               href="https://app.intolersense.com/"
               target="_blank"
@@ -119,13 +119,6 @@ const CTASection = () => {
               <span>Start Your Journey to Clarity</span>
               <ArrowRight className="h-5 w-5" />
             </motion.a>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="border-2 border-white/30 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-white/10 transition-all duration-300"
-            >
-              See How It Works
-            </motion.button>
           </div>
 
           <div className="flex items-center justify-center space-x-6 text-white/80">

@@ -107,7 +107,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 1, delay: 1 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          className="flex justify-center items-center"
         >
           <motion.a
             href="https://app.intolersense.com/"
@@ -128,13 +128,6 @@ const HeroSection = () => {
               →
             </motion.div>
           </motion.a>
-          <motion.button
-            whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.1)" }}
-            whileTap={{ scale: 0.95 }}
-            className="border-2 border-gray-600 text-gray-300 px-8 py-4 rounded-xl text-lg font-semibold hover:border-blue-500 transition-all duration-300"
-          >
-            See How It Works
-          </motion.button>
         </motion.div>
 
         {/* Trust indicators */}

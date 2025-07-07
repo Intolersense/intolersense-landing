@@ -178,9 +178,14 @@ const InsightSection = () => {
             whileTap={{ scale: 0.95 }}
             className="inline-block"
           >
-            <button className="bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
+            <a
+              href="https://app.intolersense.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 inline-block"
+            >
               Get Your Personal Insights
-            </button>
+            </a>
           </motion.div>
           <p className="text-gray-300 mt-4">Start seeing patterns in as little as 3 days</p>
         </motion.div>
