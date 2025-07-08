@@ -48,7 +48,7 @@ const SymptomSection = () => {
   ];
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center justify-center py-20">
+    <section id="how-it-works" ref={ref} className="relative min-h-screen flex items-center justify-center py-20">
       {/* Background with more clearing clouds */}
       <div className="absolute inset-0 bg-gradient-to-b from-gray-700 via-gray-600 to-gray-700">
         <motion.div

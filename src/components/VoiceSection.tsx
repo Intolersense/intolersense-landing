@@ -35,7 +35,7 @@ const VoiceSection = () => {
   ];
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center justify-center py-20">
+    <section id="features" ref={ref} className="relative min-h-screen flex items-center justify-center py-20">
       {/* Background with clearing clouds */}
       <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-700">
         <motion.div

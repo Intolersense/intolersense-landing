@@ -2,6 +2,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Cloud } from 'lucide-react';
 
+const scrollToSection = (sectionId: string) => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
 const Navbar = () => {
   return (
     <motion.nav
@@ -21,22 +28,34 @@ const Navbar = () => {
           </motion.div>
           
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#features" className="text-gray-300 hover:text-white transition-colors">
+            <button 
+              onClick={() => scrollToSection('features')}
+              className="text-gray-300 hover:text-white transition-colors"
+            >
               Features
-            </a>
-            <a href="#how-it-works" className="text-gray-300 hover:text-white transition-colors">
+            </button>
+            <button 
+              onClick={() => scrollToSection('how-it-works')}
+              className="text-gray-300 hover:text-white transition-colors"
+            >
               How It Works
-            </a>
-            <a href="#testimonials" className="text-gray-300 hover:text-white transition-colors">
+            </button>
+            <button 
+              onClick={() => scrollToSection('testimonials')}
+              className="text-gray-300 hover:text-white transition-colors"
+            >
               Reviews
-            </a>
-            <motion.button
+            </button>
+            <motion.a
+              href="https://app.intolersense.com/"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
             >
               Get Started
-            </motion.button>
+            </motion.a>
           </div>
         </div>
       </div>

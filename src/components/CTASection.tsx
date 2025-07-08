@@ -39,7 +39,7 @@ const CTASection = () => {
   ];
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center justify-center py-20">
+    <section id="testimonials" ref={ref} className="relative min-h-screen flex items-center justify-center py-20">
       {/* Clear sky background */}
       <div className="absolute inset-0 bg-gradient-to-b from-blue-400 via-blue-600 to-blue-800">
         <motion.div
