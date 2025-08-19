@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Cloud } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 
 const scrollToSection = (sectionId: string) => {
   const element = document.getElementById(sectionId);
@@ -10,6 +11,9 @@ const scrollToSection = (sectionId: string) => {
 };
 
 const Navbar = () => {
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+  
   return (
     <motion.nav
       initial={{ opacity: 0, y: -50 }}
@@ -23,29 +27,45 @@ const Navbar = () => {
             whileHover={{ scale: 1.05 }}
             className="flex items-center space-x-2"
           >
-            <Cloud className="h-8 w-8 text-blue-400" />
-            <span className="text-xl font-bold text-white">IntolerSense</span>
+            <Link to="/" className="flex items-center space-x-2">
+              <Cloud className="h-8 w-8 text-blue-400" />
+              <span className="text-xl font-bold text-white">IntolerSense</span>
+            </Link>
           </motion.div>
           
           <div className="hidden md:flex items-center space-x-8">
-            <button 
-              onClick={() => scrollToSection('features')}
+            {isHomePage ? (
+              <>
+                <button 
+                  onClick={() => scrollToSection('features')}
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
+                  Features
+                </button>
+                <button 
+                  onClick={() => scrollToSection('how-it-works')}
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
+                  How It Works
+                </button>
+                <button 
+                  onClick={() => scrollToSection('testimonials')}
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
+                  Reviews
+                </button>
+              </>
+            ) : (
+              <Link to="/" className="text-gray-300 hover:text-white transition-colors">
+                Home
+              </Link>
+            )}
+            <Link 
+              to="/analysis" 
               className="text-gray-300 hover:text-white transition-colors"
             >
-              Features
-            </button>
-            <button 
-              onClick={() => scrollToSection('how-it-works')}
-              className="text-gray-300 hover:text-white transition-colors"
-            >
-              How It Works
-            </button>
-            <button 
-              onClick={() => scrollToSection('testimonials')}
-              className="text-gray-300 hover:text-white transition-colors"
-            >
-              Reviews
-            </button>
+              Analysis
+            </Link>
             <motion.a
               href="https://app.intolersense.com/"
               target="_blank"
