@@ -6,7 +6,7 @@ import Analysis from './pages/Analysis';
 
 function App() {
   return (
-    <Router basename="/intolersense-landing">
+    <Router>
       <div className="min-h-screen bg-gray-900 text-white overflow-hidden">
         <Navbar />
         <Routes>
