@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Cloud } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { MAIN_APP_URL, BUTTON_TEXTS } from '../config';
 
 const scrollToSection = (sectionId: string) => {
   const element = document.getElementById(sectionId);
@@ -67,14 +68,14 @@ const Navbar = () => {
               Analysis
             </Link>
             <motion.a
-              href="https://app.intolersense.com/"
+              href={MAIN_APP_URL}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
             >
-              Get Started
+              {BUTTON_TEXTS.navbar}
             </motion.a>
           </div>
         </div>

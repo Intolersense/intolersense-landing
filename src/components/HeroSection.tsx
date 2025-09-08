@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import CloudBackground from './CloudBackground';
 import { Cloud } from 'lucide-react';
+import { MAIN_APP_URL, BUTTON_TEXTS } from '../config';
 
 const HeroSection = () => {
   const { ref, inView } = useInView({
@@ -110,7 +111,7 @@ const HeroSection = () => {
           className="flex justify-center items-center"
         >
           <motion.a
-            href="https://app.intolersense.com/"
+            href={MAIN_APP_URL}
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ 
@@ -120,7 +121,7 @@ const HeroSection = () => {
             whileTap={{ scale: 0.95 }}
             className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2 inline-block"
           >
-            <span>Start Your Journey to Clarity</span>
+            <span>{BUTTON_TEXTS.hero}</span>
             <motion.div
               animate={{ x: [0, 5, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
@@ -137,14 +138,15 @@ const HeroSection = () => {
           transition={{ duration: 1, delay: 1.5 }}
           className="flex items-center justify-center space-x-8 mt-8 text-gray-400 text-sm"
         >
-          <div className="flex items-center space-x-2">
+          {/* Temporarily commented out */}
+          {/* <div className="flex items-center space-x-2">
             <div className="w-3 h-3 bg-green-400 rounded-full"></div>
             <span>10,000+ users</span>
           </div>
           <div className="flex items-center space-x-2">
             <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
             <span>4.9/5 rating</span>
-          </div>
+          </div> */}
           <div className="flex items-center space-x-2">
             <div className="w-3 h-3 bg-blue-400 rounded-full"></div>
             <span>No credit card required</span>

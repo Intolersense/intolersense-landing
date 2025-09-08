@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Brain, TrendingUp, Award, Sun } from 'lucide-react';
+import { MAIN_APP_URL, BUTTON_TEXTS } from '../config';
 
 const InsightSection = () => {
   const { ref, inView } = useInView({
@@ -179,12 +180,12 @@ const InsightSection = () => {
             className="inline-block"
           >
             <a
-              href="https://app.intolersense.com/"
+              href={MAIN_APP_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 inline-block"
             >
-              Get Your Personal Insights
+              {BUTTON_TEXTS.insight}
             </a>
           </motion.div>
           <p className="text-gray-300 mt-4">Start seeing patterns in as little as 3 days</p>

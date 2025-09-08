@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { CheckCircle, Star, ArrowRight, Users, Heart } from 'lucide-react';
+import { MAIN_APP_URL, BUTTON_TEXTS } from '../config';
 
 const CTASection = () => {
   const { ref, inView } = useInView({
@@ -109,19 +110,20 @@ const CTASection = () => {
           
           <div className="flex justify-center items-center mb-8">
             <motion.a
-              href="https://app.intolersense.com/"
+              href={MAIN_APP_URL}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-gradient-to-r from-green-400 to-blue-500 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2 inline-block"
             >
-              <span>Start Your Journey to Clarity</span>
+              <span>{BUTTON_TEXTS.ctaPrimary}</span>
               <ArrowRight className="h-5 w-5" />
             </motion.a>
           </div>
 
-          <div className="flex items-center justify-center space-x-6 text-white/80">
+          {/* Temporarily commented out */}
+          {/* <div className="flex items-center justify-center space-x-6 text-white/80">
             <div className="flex items-center space-x-2">
               <Users className="h-5 w-5" />
               <span>10,000+ users</span>
@@ -130,7 +132,7 @@ const CTASection = () => {
               <Star className="h-5 w-5 text-yellow-400" />
               <span>4.9/5 rating</span>
             </div>
-          </div>
+          </div> */}
         </motion.div>
 
         {/* Testimonials */}
@@ -204,14 +206,14 @@ const CTASection = () => {
             Ready to transform your relationship with food?
           </p>
           <motion.a
-            href="https://app.intolersense.com/"
+            href={MAIN_APP_URL}
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 px-12 py-6 rounded-xl text-xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 inline-block"
           >
-            Start Free Trial Today
+            {BUTTON_TEXTS.ctaSecondary}
           </motion.a>
           <p className="text-white/60 text-sm mt-4">
             No credit card required • 7-day free trial • Cancel anytime

@@ -3,7 +3,15 @@ import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip as RTooltip }
 
 // Population presets
 const POPULATIONS = {
+  // Combined Regions
+  "North America + Europe": 1_252_900_000,
+  
+  // Continental Regions
+  "North America": 502_900_000,
+  "Europe": 750_000_000,
   "EU-27": 450_400_000,
+  
+  // Key Individual Countries
   "US": 334_900_000,
   "UK": 67_700_000,
   "Germany": 84_400_000,
@@ -46,10 +54,24 @@ const SCENARIOS = {
   },
 };
 
+// Currency conversion rates (EUR as base)
+const EXCHANGE_RATES = {
+  EUR: 1.0,
+  USD: 1.09,
+  GBP: 0.84,
+};
+
+const CURRENCY_SYMBOLS = {
+  EUR: "€",
+  USD: "$",
+  GBP: "£",
+};
+
 export default function BreakEvenDashboard() {
   // --- Controls ---
   const [populationKey, setPopulationKey] = useState("EU-27");
   const [scenarioKey, setScenarioKey] = useState("Medium");
+  const [currency, setCurrency] = useState("EUR");
 
   // Core parameters (start with Medium preset)
   const [hsShare, setHsShare] = useState(SCENARIOS.Medium.hsShare); // Food hypersensitivities share (5–25%)
@@ -113,11 +135,19 @@ export default function BreakEvenDashboard() {
     };
   }, [POP, hsShare, seekCare, adoption, responseRate, gpAvoided, unitGP, daysSaved, valuePerDay, platformCost]);
 
-  // Formatting
-  const fmt = (v: number) => new Intl.NumberFormat("en-GB", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(v || 0);
+  // Currency conversion and formatting
+  const convertCurrency = (value: number) => value * EXCHANGE_RATES[currency as keyof typeof EXCHANGE_RATES];
+  const fmt = (v: number) => {
+    const converted = convertCurrency(v || 0);
+    return new Intl.NumberFormat("en-GB", { 
+      style: "currency", 
+      currency: currency, 
+      maximumFractionDigits: 0 
+    }).format(converted);
+  };
   const fmtInt = (n: number) => new Intl.NumberFormat().format(Math.round(n || 0));
 
-  // Adoption sensitivity chart (net savings in € millions)
+  // Adoption sensitivity chart (net savings in millions)
   const sensitivityData = Array.from({ length: 11 }).map((_, i) => {
     const a = i * 0.1; // adoption 0..1
     const popHS = POP * hsShare;
@@ -127,7 +157,7 @@ export default function BreakEvenDashboard() {
     const gpSavings = responders * gpAvoided * unitGP;
     const prodSavings = responders * daysSaved * valuePerDay;
     const programCosts = activeUsers * platformCost;
-    const net = gpSavings + prodSavings - programCosts;
+    const net = (gpSavings + prodSavings - programCosts) * EXCHANGE_RATES[currency as keyof typeof EXCHANGE_RATES];
     return { adoption: Math.round(a * 100), net: Math.round(net / 1e6) };
   });
 
@@ -145,6 +175,12 @@ export default function BreakEvenDashboard() {
               <label className="block text-xs text-gray-600 mb-1">Population</label>
               <select className="border rounded p-2 text-sm text-gray-900" value={populationKey} onChange={(e)=>setPopulationKey(e.target.value)}>
                 {Object.keys(POPULATIONS).map(k => <option key={k} value={k}>{k}</option>)}
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs text-gray-600 mb-1">Currency</label>
+              <select className="border rounded p-2 text-sm text-gray-900" value={currency} onChange={(e)=>setCurrency(e.target.value)}>
+                {Object.keys(EXCHANGE_RATES).map(k => <option key={k} value={k}>{k} ({CURRENCY_SYMBOLS[k as keyof typeof CURRENCY_SYMBOLS]})</option>)}
               </select>
             </div>
             <div>
@@ -181,13 +217,13 @@ export default function BreakEvenDashboard() {
           </div>
 
           <div className="mt-4">
-            <h3 className="font-medium text-gray-900">Adoption sensitivity (net savings in € millions)</h3>
+            <h3 className="font-medium text-gray-900">Adoption sensitivity (net savings in {CURRENCY_SYMBOLS[currency as keyof typeof CURRENCY_SYMBOLS]} millions)</h3>
             <div style={{ height: 220 }} className="mt-2">
               <ResponsiveContainer>
                 <BarChart data={sensitivityData}>
                   <XAxis dataKey="adoption" label={{ value: 'Adoption %', position: 'insideBottom', offset: -5 }} />
-                  <YAxis label={{ value: 'Net (€M)', angle: -90, position: 'insideLeft' }} />
-                  <RTooltip formatter={(v) => `${v} M€`} />
+                  <YAxis label={{ value: `Net (${CURRENCY_SYMBOLS[currency as keyof typeof CURRENCY_SYMBOLS]}M)`, angle: -90, position: 'insideLeft' }} />
+                  <RTooltip formatter={(v) => `${v} M${CURRENCY_SYMBOLS[currency as keyof typeof CURRENCY_SYMBOLS]}`} />
                   <Bar dataKey="net" fill="#8884d8" />
                 </BarChart>
               </ResponsiveContainer>
@@ -236,14 +272,14 @@ export default function BreakEvenDashboard() {
             </div>
 
             <div className="pt-3 border-t">
-              <label className="block text-xs text-gray-600">Platform cost per active user (EUR)</label>
+              <label className="block text-xs text-gray-600">Platform cost per active user ({currency})</label>
               <input type="range" min={5} max={60} step={1} value={platformCost} onChange={(e)=>setPlatformCost(parseFloat(e.target.value))} className="w-full" />
-              <div className="text-xs text-gray-700">€{platformCost}/user</div>
+              <div className="text-xs text-gray-700">{CURRENCY_SYMBOLS[currency as keyof typeof CURRENCY_SYMBOLS]}{Math.round(convertCurrency(platformCost))}/user</div>
             </div>
 
             <div className="pt-3 border-t">
               <div className="text-xs text-gray-500">Unit costs & value</div>
-              <div className="text-xs mt-1 text-gray-700">GP €<input className="w-16 inline border p-1 rounded text-gray-900" value={unitGP} onChange={(e)=>setUnitGP(Number(e.target.value))} /> &nbsp;Value/day €<input className="w-20 inline border p-1 rounded text-gray-900" value={valuePerDay} onChange={(e)=>setValuePerDay(Number(e.target.value))} /></div>
+              <div className="text-xs mt-1 text-gray-700">GP {CURRENCY_SYMBOLS[currency as keyof typeof CURRENCY_SYMBOLS]}<input className="w-16 inline border p-1 rounded text-gray-900" value={Math.round(convertCurrency(unitGP))} onChange={(e)=>setUnitGP(Number(e.target.value) / EXCHANGE_RATES[currency as keyof typeof EXCHANGE_RATES])} /> &nbsp;Value/day {CURRENCY_SYMBOLS[currency as keyof typeof CURRENCY_SYMBOLS]}<input className="w-20 inline border p-1 rounded text-gray-900" value={Math.round(convertCurrency(valuePerDay))} onChange={(e)=>setValuePerDay(Number(e.target.value) / EXCHANGE_RATES[currency as keyof typeof EXCHANGE_RATES])} /></div>
             </div>
           </div>
         </aside>
